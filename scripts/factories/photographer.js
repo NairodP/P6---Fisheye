@@ -1,17 +1,18 @@
-function photographerFactory(data) {
-    const { name, portrait } = data;
+import PhotographerInfo from "../models/photographer.js";
 
-    const picture = `assets/photographers/${portrait}`;
-
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (article);
+export default function photographerFactory(result, id) {
+    // Selon le type choisit on récup la data d'un photographe ou tous les photographes
+    switch (result.type) {
+    case 'photographer': {
+        // data d'un photographe récup grâçe à son ID
+        const photographerData = result.data.filter((photographer) => photographer.id == id)
+        return new PhotographerInfo(photographerData[0])
     }
-    return { name, picture, getUserCardDOM }
+    case 'photographers': {
+        // Récup de tous les photographes
+        return result.data.map((photographer) => new PhotographerInfo(photographer))
+    }
+    default:
+        throw new Error('No type')
+    }
 }
