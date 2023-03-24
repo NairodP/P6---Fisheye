@@ -2,16 +2,17 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
     <title>Fisheye - photographe</title>
   </head>
   <body>
-
     <header>
       <a href="./#" title="Accueil Fisheye" tabindex="1">
         <!-- tabindex=1 pour sélectionner en tout premier avec tab l'élément -->
@@ -24,28 +25,41 @@
     </header>
 
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+      <!-- caractéristiques du photographe -->
+      <section class="photograph-section">
+        <div class="photograph_info"></div>
+        <button
+          class="contact_button"
+          aria-label="Contacter le photographe"
+          tabindex="2"
+        >
           Contactez-moi
         </button>
-      </div>
+        <div class="photograph_picture"></div>
+      </section>
+
+      <!-- box de tri -->
+      <div class="filtre"></div>
+
+      <!-- photos et videos -->
+      <section class="photograph_media"></section>
+
+      <!-- compteur de likes -->
+      <div class="photograph_likes"></div>
     </main>
-    <div id="contact_modal">
-      <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
-          </div>
-          <button class="contact_button">Envoyer</button>
-        </form>
-      </div>
-    </div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+
+    <!-- modal -->
+    <div id="contact-modal" aria-hidden="true" role="dialog"></div>
+    <div class="lightbox_modal" aria-hidden="true" role="dialog"></div>
+
+    <script
+      src="https://kit.fontawesome.com/87b1b2a1ce.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+
+    <!-- point d'entrée -->
+    <script src="/scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>

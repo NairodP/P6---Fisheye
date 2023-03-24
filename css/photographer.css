@@ -1,76 +1,405 @@
-#contact_modal {
-    display: none;
+/* header */
+.photograph-section {
+  background-color: #fafafa;
+  height: 300px;
+  margin: 30px 100px 30px 100px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  align-items: center;
+  justify-items: center;
 }
-
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+.photograph-section .photograph_info article {
+  display: flex;
+  flex-direction: column;
 }
-
+.photograph-section .photograph_info article h2 {
+  color: #d3573c;
+  font-size: 4em;
+  font-weight: 500;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  text-align: center;
+}
+.photograph-section .photograph_info article h3 {
+  color: #901c1c;
+  font-size: 1.5em;
+  margin-top: 20px;
+  font-weight: 500;
+}
+.photograph-section .photograph_info article div {
+  color: #525252;
+  font-size: 1.1em;
+}
+.photograph-section .photograph_picture img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50% 50%;
+  background: #c4c4c4;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  overflow-clip-margin: unset;
+}
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+.contact_button:hover, .contact_button:focus {
+  background-color: #D3573C;
+  color: black;
+}
+.submit_button {
+  height: 50px;
 }
 
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+/* contactForm */
+/**************** Contact Modal ****************/
+#contact-modal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 0;
+  color: black;
+  overflow: auto;
+  z-index: 100;
 }
-
-.modal header {
-    justify-content: space-between;
-    width: 100%;
+#contact-modal .modal {
+  border-radius: 5px;
+  background-color: #DB8876;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 600px;
+  position: relative;
+  margin: 2% auto 2% auto;
+  padding: 0px 40px 40px 40px;
 }
-
+#contact-modal .modal header {
+  display: flex;
+  align-items: baseline;
+  height: 200px;
+}
+#contact-modal .modal header h2 {
+  font-size: 64px;
+  font-weight: normal;
+  margin-top: 20px;
+}
+#contact-modal .modal label {
+  color: #312E2E;
+  font-size: 36px;
+}
+#contact-modal .modal textarea {
+  width: 600px;
+  height: 170px;
+  resize: none;
+  font-size: 2em;
+  border-radius: 7px;
+  margin-bottom: 20px;
+}
+input {
+  font-size: 2em;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#modalSuccess {
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+}
+#modalSuccess span {
+  position: absolute;
+  text-align: center;
+  font-size: 3em;
+  font-weight: 500;
+}
+#modalSuccess input {
+  margin-top: 250%;
+  text-align: center;
+  overflow: scroll;
+  padding: 12px 0 12px;
+}
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
+}
+/* Error */
+.formData[data-error]::after {
+  content: attr(data-error);
+  font-size: 2em;
+  font-weight: 600;
+  color: #901C1C;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  transition: 0.3s;
+}
+.formData[data-error-visible=true]::after {
+  opacity: 1;
+  margin-bottom: 5px;
+}
+.formData[data-error-visible=true] .text-control {
+  border: 2px solid #901C1C;
+}
+.no-scroll {
+  overflow: hidden;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* .sr-only est utilisée pour masquer le contenu d'une balise à l'écran tout en le rendant accessible aux lecteurs d'écran ou aux utilisateurs de technologies d'assistance. */
+
+/* filtre */
+.filtre {
+  margin: 30px 100px 30px 100px;
+  position: relative;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+.filtre .dropdown-el {
+  position: absolute;
+  max-height: 2em;
+  overflow: hidden;
+  cursor: pointer;
+  margin-top: -15px;
+  margin-left: 30px;
+  border-radius: 0.2em;
+  color: white;
+  background-color: #901c1c;
+  transition: 0.25s ease-in-out;
+  padding: 10px;
+  z-index: 2;
+}
+.filtre .dropdown-el:focus-visible {
+  outline: 6px solid #d3573c;
+}
+.filtre .dropdown-el input {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  opacity: 0.01;
+}
+.filtre .dropdown-el label {
+  border-top: 0.06em solid #f2f2f2;
+  display: block;
+  line-height: 2em;
+  padding-left: 1em;
+  padding-right: 3em;
+  cursor: pointer;
+}
+.filtre .dropdown-el label:focus-visible {
+  outline: 3px solid white;
+}
+.filtre .dropdown-el label:nth-child(2) {
+  border-top: 0px;
+}
+.filtre .dropdown-el label.selected {
+  border: 0px;
+}
+.filtre .dropdown-el label.unselected {
+  display: none;
+}
+.filtre .dropdown-el::after {
+  content: "";
+  position: absolute;
+  right: 0.8em;
+  top: 1.3em;
+  border: 0.3em solid white;
+  border-color: white transparent transparent transparent;
+  transition: 0.75s;
+}
+.filtre .dropdown-el.expanded {
+  max-height: 15em;
+}
+.filtre .dropdown-el.expanded::after {
+  transform: rotate(-180deg);
+  top: 1em;
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+
+.sorter_media {
+  margin: 30px 100px 30px 100px;
+  position: relative;
+  font-size: 1.4em;
+  font-weight: 600;
 }
 
-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+.photograph_media {
+  margin: 70px 100px 30px 100px;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8%;
+  align-content: center;
+  justify-content: start;
+}
+.photograph_media article {
+  display: block;
+}
+.photograph_media article img {
+  height: 300px;
+  width: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #c4c4c4;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  overflow-clip-margin: inherit;
+}
+.photograph_media article .plyr {
+  height: 305px;
+  width: 355px;
+  border-radius: 10px;
+  background: #c4c4c4;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+.photograph_media article .playMask {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 305px;
+  width: 355px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 100px;
+  opacity: 1;
+  margin-top: -305px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.photograph_media article div {
+  display: flex;
+  font-size: 1em;
+  justify-content: space-between;
+  align-items: baseline;
+  color: #901c1c;
+}
+.photograph_media article div h3 {
+  font-size: 1.5em;
+  font-weight: normal;
+  margin-top: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 290px;
+}
+.photograph_media article div i {
+  display: flex;
+  flex-flow: row-reverse;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.photograph_media article div i::before {
+  margin-left: 10px;
+}
+.photograph_media article div i span {
+  font-family: "Open Sans";
+  background-color: none;
 }
 
-form label {
-    color: #312E2E;
-    font-size: 36px;
+.active-heart {
+  text-shadow: 1px 1px 9px rgba(255,119,43,0.35);
+  background: rgb(144,28,28);
+  background: -moz-linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
+  background: -webkit-linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
+  background: linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+.photograph_likes {
+  background-color: #d3573c;
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  margin-left: 70.5%;
+  border-radius: 5px;
+  padding: 20px;
+}
+.photograph_likes div {
+  font-size: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 600;
+}
+.photograph_likes div div {
+  display: flex;
+  align-items: center;
+}
+.photograph_likes div div .totalLikes {
+  font-size: 1.5rem;
+  margin-right: 5px;
+  font-family: "Open Sans";
 }
 
-form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+.lightbox_modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 99%;
+  height: 100%;
+  background-color: white;
+  z-index: 10;
+  transition: opacity 0.3s;
+}
+.lightbox_modal div {
+  display: flex;
+}
+.lightbox_modal div .carousel {
+  display: flex;
+  padding-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#previous {
+  margin-left: 7%;
+}
+#next {
+  margin-left: 90%;
+}
+#previous,
+#next {
+  color: #901c1c;
+  font-size: 50px;
+  position: fixed;
+  top: 40%;
+  z-index: 12;
+  cursor: pointer;
+}
+#close {
+  color: #901c1c;
+  font-size: 50px;
+  position: fixed;
+  top: 30px;
+  right: 8%;
+  z-index: 12;
+  cursor: pointer;
 }

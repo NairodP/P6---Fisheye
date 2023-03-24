@@ -1,4 +1,5 @@
 import photographerFactory from "../factories/photographer.js";
+import mediaFactory from "../factories/media.js";
 
 class Api {
   constructor(type) {
@@ -8,7 +9,7 @@ class Api {
   }
 
   async get() {
-    // Fetch and return the JSON File
+    // Fetch et retourne le ficher JSON
     const cachedResult = this.cache.find((elt) => elt.key === this.type);
     if (cachedResult) {
       return cachedResult;
@@ -18,7 +19,7 @@ class Api {
 
     if (response.status == 200) {
       let json = await response.json();
-      json = this.type == "photographers" ? json.photographers : null;
+      json = this.type == "photographers" ? json.photographers : json.media;
       const data = {
         key: this.type,
         data: [...json],
@@ -49,5 +50,18 @@ export class PhotographerApi extends Api {
     const photographers = await photographerFactory(result, 0);
 
     return photographers;
+  }
+}
+
+export class MediaApi extends Api {
+  // Récupère tous les médias à partir d'un id et filtre pour le mettre dans un nouveau tableau (medias)
+  async getMediaOfPhotographer(id) {
+    let getMedia = await this.get();
+    getMedia = await getMedia.data.filter(
+      (media) => media.photographerId == id
+    );
+    const medias = await getMedia.map((media) => mediaFactory(media));
+
+    return medias;
   }
 }
