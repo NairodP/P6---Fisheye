@@ -1,3 +1,8 @@
+// utilisé dans api/Api
+
+// créé des instances de la classe PhotographerInfo en fonction des datas renvoyées par l'API.
+// 2 params : result contient les datas renvoyées par l'API, et id l'ID du photographe à récupérer uniquement si le type est "photographer" sinon pas utilisé.
+
 import PhotographerInfo from "../models/photographer.js";
 
 export default function photographerFactory(result, id) {
@@ -13,6 +18,6 @@ export default function photographerFactory(result, id) {
         return result.data.map((photographer) => new PhotographerInfo(photographer))
     }
     default:
-        throw new Error('No type')
+        throw new Error('Pas de type (photographer ou photographers)')
     }
 }

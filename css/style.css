@@ -1,4 +1,7 @@
-@import url("photographer.css");
+:focus-visible {
+  outline: 3px solid rgb(13, 192, 0);  
+  border-radius: 10px; 
+}
 
 body {
   font-family: "DM Sans", sans-serif;
@@ -32,7 +35,7 @@ h1 {
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
+  gap: 80px;
   margin: 0 100px;
 }
 

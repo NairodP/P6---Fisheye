@@ -1,4 +1,4 @@
-import Lightbox from "./lightboxModal.js";
+import carrousselMedia from "./carrousselMedia.js";
 import MediaCard from "./mediaCard.js";
 import ProxyTri from "../proxy/proxyTri.js";
 import {
@@ -6,7 +6,7 @@ import {
   setAttribute,
   classListToggle,
   appendChild,
-} from "../utils/shortcutDom.js";
+} from "../utils/genRaccourci.js";
 
 const onEnterClick = (target) => {
   target.addEventListener("keypress", (event) => {
@@ -34,16 +34,16 @@ export default class SorterForm {
     let position = 1;
     // Generate the sorted medias galery and carousel
     if (sorter) {
-      const sortedData = await this.ProxyTri.sorter(this.medias, sorter);
+      const sortedData = await this.ProxyTri.trieur(this.medias, sorter);
       const SortedMovies = sortedData.data;
       SortedMovies.forEach((media) => {
         // get media link
         media.link =
-          media.type === "ImageM"
+          media.type === "ImageMedia"
             ? media.getImage(this.name)
             : media.getVideo(this.name);
         media.position = position;
-        new Lightbox(media).lightboxRender();
+        new carrousselMedia(media).MediaRender();
         new MediaCard(media).getMediaCardDOM();
 
         position += 1;
@@ -95,7 +95,7 @@ export default class SorterForm {
       }
     });
     onEnterClick(dropdown);
-    this.sorterMovies("POP");
+    this.sorterMovies("POPULARITE");
   }
 
   clearWrappers() {
@@ -108,14 +108,40 @@ export default class SorterForm {
     // Generate the sorter element
     const sorterForm = `
                         <label id="dropdownForSort">Trier par : </label>
+                        
                         <span class="dropdown-el" id="dropdownSort" aria-labelledBy="dropdownForSort" role="group" tabindex="3">
-                            <input type="radio" name="sortbest" role="selectSorter" value="POP" id="sort-best" aria-labelledBy="bestLabel">
+                            <input type="radio" name="sortbest" role="selectSorter" value="POPULARITE" id="sort-best" aria-labelledBy="bestLabel">
                                 <label id="bestLabel" for="sort-best"  aria-label="Trier par popularité" tabindex="3">Popularité</label>
                             <input type="radio" name="sortdate" role="selectSorter"  value="DATE" id="sort-date" aria-labelledBy="dateLabel">
                                 <label id="dateLabel" for="sort-date" class="unselected" aria-label="Trier par date" tabindex="3">Date</label>
                             <input type="radio" name="sorttitle" role="selectSorter" value="TITRE" id="sort-title" aria-labelledBy="titleLabel">
                                 <label id="titleLabel" for="sort-title" class="unselected" aria-label="Trier par titre" tabindex="3">Titre</label>
                         </span>`;
+    // const sorterForm = `<label id="dropdownForSort">Trier par : </label>
+    //                     <form class="bg">
+    //                       <div class="select" tabindex="1">
+    //                         <i class="fa-solid fa-chevron-up" style="color: #000000;"></i>
+    //                         <input
+    //                           class="selectopt"
+    //                           name="test"
+    //                           type="radio"
+    //                           id="opt1"
+    //                           checked
+    //                           tabindex="0"
+    //                         />
+    //                         <label for="opt1" class="option" tabindex="0">
+    //                           <span class="border-top"></span>
+    //                         Date</label>
+    //                         <input class="selectopt" name="test" type="radio" id="opt2" tabindex="0" />
+    //                         <label for="opt2" class="option">
+    //                           <span class="border-top"></span>
+    //                         Popularité</label>
+    //                         <input class="selectopt" name="test" type="radio" id="opt3" tabindex="0" />
+    //                         <label for="opt3" class="option">
+    //                           <span class="border-top"></span>
+    //                         Titre</label>
+    //                       </div>
+    //                     </form>`;
 
     this.$wrapper.innerHTML = sorterForm;
     this.onChangeSorter();

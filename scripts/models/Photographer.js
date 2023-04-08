@@ -1,3 +1,7 @@
+// utilisé dans factories/photographer
+
+// accès à toutes les données d'un phtographer grâçe à des methodes get.
+
 export default class PhotographerInfo {
   constructor(photographer) {
     this._name = photographer.name;

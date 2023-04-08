@@ -1,6 +1,6 @@
 import * as Api from "../api/Api.js";
 import PhotographerCard from "../templates/photographerCard.js";
-import { querySelector, appendChild } from "../utils/shortcutDom.js";
+import { querySelector, appendChild } from "../utils/genRaccourci.js";
 import FormModal from "../templates/contactForm.js";
 import triForm from "../templates/triForm.js";
 import Carroussel from "../templates/carousel.js";
@@ -31,7 +31,7 @@ class PhotographerPage {
 
     // Create Modal Form
     const form = new FormModal(photographer.name);
-    form.getFormRender();
+    form.formRender();
     // Create Modal Lightbox
     carroussel.carrousselRender();
     // display media's gallery

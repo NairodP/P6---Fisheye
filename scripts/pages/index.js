@@ -1,3 +1,5 @@
+// affiche les données de la page principale
+
 import * as Api from "../api/Api.js";
 import PhotographerCard from "../templates/photographerCard.js";
 
@@ -21,10 +23,12 @@ class HomePage {
           .querySelector(".photographer_section")
           .appendChild(card.getPhotographerCard());
         index += 1;
+        // ordonne les photographes sur la page (attribut tabindex) pour permettre aux utilisateurs de naviguer avec le clavier ou une tablette
       });
     }
   }
 }
 
+// créé une instance de la class HomePage pour appeller la méthode init et lancer l'affichage des données
 const page = new HomePage();
 page.init();

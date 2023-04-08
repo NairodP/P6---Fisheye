@@ -1,4 +1,8 @@
 /* header */
+main {
+  margin-bottom: 0px;
+}
+
 .photograph-section {
   background-color: #fafafa;
   height: 300px;
@@ -47,13 +51,14 @@
   width: 170px;
   height: 70px;
   border: none;
-  background-color: #901C1C;
+  background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
 }
-.contact_button:hover, .contact_button:focus {
-  background-color: #D3573C;
+.contact_button:hover,
+.contact_button:focus {
+  background-color: #d3573c;
   color: black;
 }
 .submit_button {
@@ -67,15 +72,15 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  background-color: transparent;
   top: 0;
-  color: black;
   overflow: auto;
   z-index: 100;
 }
 #contact-modal .modal {
   border-radius: 5px;
-  background-color: #DB8876;
+  background-color: #db8876;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,7 +101,7 @@
   margin-top: 20px;
 }
 #contact-modal .modal label {
-  color: #312E2E;
+  color: #312e2e;
   font-size: 36px;
 }
 #contact-modal .modal textarea {
@@ -140,21 +145,21 @@ input {
   content: attr(data-error);
   font-size: 2em;
   font-weight: 600;
-  color: #901C1C;
+  color: #901c1c;
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
   text-align: left;
   transition: 0.3s;
 }
-.formData[data-error-visible=true]::after {
+.formData[data-error-visible="true"]::after {
   opacity: 1;
   margin-bottom: 5px;
 }
-.formData[data-error-visible=true] .text-control {
-  border: 2px solid #901C1C;
+.formData[data-error-visible="true"] .text-control {
+  border: 2px solid #901c1c;
 }
-.no-scroll {
+.overflowHidden {
   overflow: hidden;
 }
 .sr-only {
@@ -172,7 +177,7 @@ input {
 
 /* filtre */
 .filtre {
-  margin: 30px 100px 30px 100px;
+  margin: 70px 100px 30px 100px;
   position: relative;
   font-size: 1.4em;
   font-weight: 600;
@@ -183,13 +188,16 @@ input {
   overflow: hidden;
   cursor: pointer;
   margin-top: -15px;
-  margin-left: 30px;
+  margin-left: 25px;
   border-radius: 0.2em;
   color: white;
   background-color: #901c1c;
   transition: 0.25s ease-in-out;
   padding: 10px;
   z-index: 2;
+}
+.filtre .dropdown-el i {
+  position: absolute;
 }
 .filtre .dropdown-el:focus-visible {
   outline: 6px solid #d3573c;
@@ -226,7 +234,7 @@ input {
   right: 0.8em;
   top: 1.3em;
   border: 0.3em solid white;
-  border-color: white transparent transparent transparent;
+  border-color: white transparent transparent;
   transition: 0.75s;
 }
 .filtre .dropdown-el.expanded {
@@ -237,23 +245,16 @@ input {
   top: 1em;
 }
 
-
-.sorter_media {
-  margin: 30px 100px 30px 100px;
-  position: relative;
-  font-size: 1.4em;
-  font-weight: 600;
-}
-
 .photograph_media {
   margin: 70px 100px 30px 100px;
   max-width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8%;
-  align-content: center;
-  justify-content: start;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  justify-content: center;
+  column-gap: 11%;
 }
+
 .photograph_media article {
   display: block;
 }
@@ -267,6 +268,11 @@ input {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
   overflow-clip-margin: inherit;
 }
+.photograph_media article img:hover,
+.photograph_media article .playMask:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 400ms ease-in-out;
+}
 .photograph_media article .plyr {
   height: 305px;
   width: 355px;
@@ -279,8 +285,8 @@ input {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 305px;
-  width: 355px;
+  height: 300px;
+  width: 350px;
   background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 100px;
@@ -321,11 +327,23 @@ input {
 }
 
 .active-heart {
-  text-shadow: 1px 1px 9px rgba(255,119,43,0.35);
-  background: rgb(144,28,28);
-  background: -moz-linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
-  background: -webkit-linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
-  background: linear-gradient(51deg, rgba(144,28,28,1) 65%, rgba(228,144,44,1) 82%);
+  text-shadow: 1px 1px 9px rgba(255, 119, 43, 0.35);
+  background: rgb(144, 28, 28);
+  background: -moz-linear-gradient(
+    51deg,
+    rgba(144, 28, 28, 1) 65%,
+    rgba(228, 144, 44, 1) 82%
+  );
+  background: -webkit-linear-gradient(
+    51deg,
+    rgba(144, 28, 28, 1) 65%,
+    rgba(228, 144, 44, 1) 82%
+  );
+  background: linear-gradient(
+    51deg,
+    rgba(144, 28, 28, 1) 65%,
+    rgba(228, 144, 44, 1) 82%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
@@ -355,11 +373,15 @@ input {
 }
 .photograph_likes div div .totalLikes {
   font-size: 1.5rem;
-  margin-right: 5px;
+  margin-right: 6px;
   font-family: "Open Sans";
 }
+.photograph_likes div div i.fa-heart {
+  font-size: 1.4rem;
+}
 
-.lightbox_modal {
+/*...................LIGHTBOX..............*/
+#carroussel-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -370,21 +392,76 @@ input {
   z-index: 10;
   transition: opacity 0.3s;
 }
-.lightbox_modal div {
+#carroussel-modal div {
   display: flex;
 }
-.lightbox_modal div .carousel {
+#carroussel-modal div .carousel {
   display: flex;
-  padding-top: 2%;
-  margin-left: auto;
-  margin-right: auto;
+  /* padding-top: 3%; */
+  padding-left: 0;
+  margin: 3% auto 0;
 }
-#previous {
-  margin-left: 7%;
+#carroussel-modal div .carousel img {
+  width: 50vw;
+  height: 80vh;
+  object-fit: cover;
+  border-radius: 10px;
+  overflow-clip-margin: unset;
+  object-position: 50% 30%;
 }
-#next {
-  margin-left: 90%;
+#carroussel-modal div .carousel .play-button {
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s;
+  font-size: 100px;
+  color: white;
+  border: 0;
+  align-self: center;
 }
+#carroussel-modal div .carousel .plyr {
+  border-radius: 10px;
+}
+#carroussel-modal div .carousel .item-title {
+  color: #901c1c;
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+/*...................ACTIVE ITEM..............*/
+.active-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-item-video {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70vw;
+  height: 90vh;
+  cursor: pointer;
+}
+
+.carousel-item {
+  display: none;
+}
+
+/*...................BUTTONS..............*/
+#close {
+  color: #901c1c;
+  font-size: 50px;
+  position: fixed;
+  top: 30px;
+  right: 8%;
+  z-index: 12;
+  cursor: pointer;
+}
+
 #previous,
 #next {
   color: #901c1c;
@@ -394,12 +471,11 @@ input {
   z-index: 12;
   cursor: pointer;
 }
-#close {
-  color: #901c1c;
-  font-size: 50px;
-  position: fixed;
-  top: 30px;
-  right: 8%;
-  z-index: 12;
-  cursor: pointer;
+
+#next {
+  margin-left: 90%;
+}
+
+#previous {
+  margin-left: 7%;
 }

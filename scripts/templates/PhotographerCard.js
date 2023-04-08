@@ -1,3 +1,5 @@
+// utilisé dans les deux pages
+
 export default class PhotographerCard {
   constructor(photographer) {
     this.name = photographer.name;
@@ -7,18 +9,17 @@ export default class PhotographerCard {
     this.tagline = photographer.tagline;
     this.price = photographer.price;
     this.index = photographer.index;
-
-    this.$wrapperArticle = document.createElement("article");
-    this.$wrapperPic = document.createElement("div");
-    this.$wrapperLikes = document.createElement("div");
+    this.photographerInfos = document.createElement("article");
+    this.photographerPictureContent = document.createElement("div");
+    this.photographerLikesContent = document.createElement("div");
   }
 
   getPhotographerPicture() {
     // Photo // Entête Photographer Page
     const img = `<img src="${this.picture}" alt="Photo du photographe ${this.name}" aria-label="Photo du photographe ${this.name}"> `;
-    this.$wrapperPic.innerHTML = img;
+    this.photographerPictureContent.innerHTML = img;
 
-    return this.$wrapperPic;
+    return this.photographerPictureContent;
   }
 
   getPhotographerInfo() {
@@ -28,13 +29,12 @@ export default class PhotographerCard {
                       <h3>${this.location}</h3>
                       <div>${this.tagline}</div>
                     </div>`;
-    this.$wrapperArticle.innerHTML = article;
-
-    return this.$wrapperArticle;
+    this.photographerInfos.innerHTML = article;
+    return this.photographerInfos;
   }
 
   getPhotographerCard() {
-    // Card complète
+    // Card complète // Home page
     const article = `<a href="photographer.html?id=${this.id}" title="Aller à la page du photographe ${this.name}" aria-label="${this.name}">
                       <img src="${this.picture}" alt="Aller à la page du photographe ${this.name}">
                       <h2>${this.name}</h2>
@@ -44,9 +44,8 @@ export default class PhotographerCard {
                       <span class="tagline">${this.tagline}</span>
                       <span class="price">${this.price}€/jour</span>
                     </div>`;
-    this.$wrapperArticle.innerHTML = article;
-
-    return this.$wrapperArticle;
+    this.photographerInfos.innerHTML = article;
+    return this.photographerInfos;
   }
 
   getPhotographerLikes(likes) {
@@ -56,8 +55,7 @@ export default class PhotographerCard {
                     <i class="fa-solid fa-heart" style="color: #black;"></i>
                   </div>
                   <span aria-label="tarif">${this.price} € / jour</span>`;
-    this.$wrapperLikes.innerHTML = like;
-
-    return this.$wrapperLikes;
+    this.photographerLikesContent.innerHTML = like;
+    return this.photographerLikesContent;
   }
 }

@@ -1,60 +1,64 @@
+// utilisé dans factories/media
+
+// permet d'obtenir les informations d'une publication (stockée dans asset/media) qui vont notamment servir pour le filtre de tri.
+// 2 Classes enfants permettant de retourner les chemins d'accès lorsque le media est une video ou une image
+
 class Media {
   constructor(data) {
-    this._id = data.id;
-    this._photographerId = data.photographerId;
-    this._title = data.title;
-    this._likes = data.likes;
-    this._date = data.date;
-    this._price = data.price;
+    this.id = data.id;
+    this.photographerId = data.photographerId;
+    this.title = data.title;
+    this.likes = data.likes;
+    this.date = data.date;
+    this.price = data.price;
   }
 
-  get id() {
-    return this._id;
+  getId() {
+    return this.id;
   }
 
-  get photographerId() {
-    return this._photographerId;
+  getPhotographerId() {
+    return this.photographerId;
   }
 
-  get title() {
-    return this._title;
+  getTitle() {
+    return this.title;
   }
 
-  get likes() {
-    return this._likes;
+  getLikes() {
+    return this.likes;
   }
 
-  get date() {
-    return this._date;
+  getDate() {
+    return this.date;
   }
 
-  get price() {
-    return this._price;
+  getPrice() {
+    return this.price;
   }
 
-  photographerFolder(name) {
+  getPhotographerFolderName(name) {
     if (name) {
-      // prend simplement le prénom en enlevant le tiret d'union s'il y en a un
-      let folder = name.split(" ")[0];
-      if (folder.includes("-")) {
-        folder = folder.replace("-", "");
+      let folderName = name.split(" ")[0];
+      if (folderName.includes("-")) {
+        folderName = folderName.replace("-", "");
       }
-      return folder;
+      return folderName;
     }
     return false;
   }
 
   getSource(photographerName, media) {
     if (photographerName) {
-      const folder = this.photographerFolder(photographerName);
-      return `assets/media/${folder}/${media}`;
+      const folderName = this.getPhotographerFolderName(photographerName);
+      return `assets/media/${folderName}/${media}`;
     }
     return false;
   }
 }
 
 // Image Media
-export class ImageM extends Media {
+export class ImageMedia extends Media {
   constructor(data) {
     super(data);
     this._image = data.image;
@@ -67,7 +71,7 @@ export class ImageM extends Media {
 }
 
 // Video Media
-export class VideoM extends Media {
+export class VideoMedia extends Media {
   constructor(data) {
     super(data);
     this._video = data.video;

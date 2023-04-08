@@ -1,6 +1,9 @@
+// utilisé dans les 2 pages d'affichages
+
 import photographerFactory from "../factories/photographer.js";
 import mediaFactory from "../factories/media.js";
 
+// requête fetch sur un fichier JSON et stocker les données dans un cache. La propriété url contient l'URL du fichier JSON, la propriété type indique le type de données que l'on veut récupérer ("photographers" ou "media"), et la propriété cache stocke les résultats de la requête
 class Api {
   constructor(type) {
     this.url = "data/photographers.json";

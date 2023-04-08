@@ -1,202 +1,70 @@
 import {
-  querySelector,
   getElementById,
   appendChild,
   setAttribute,
-  classListToggle,
-} from "../utils/shortcutDom.js";
+  querySelector,
+  clickSimulation,
+} from "../utils/genRaccourci.js";
 
-const body = document.querySelector("body");
-const main = document.querySelector("#main");
-
-function onModal(target) {
-  main.style.display = main.style.display === "none" ? "block" : "none";
-  classListToggle("no-scroll", body);
-  target.toggleAttribute("aria-hidden");
-  target.style.display = target.style.display === "none" ? "block" : "none";
-}
-
-export const trapFocus = (modal) => {
-  // add all the elements inside modal which you want to make focusable
-  const focusableElements = Array.from(
-    modal.querySelectorAll(
-      'button[type=submit], i[tabindex="1"], img[id="closeModal"], input, textarea, li[class="active-item"], [tabindex]:not([tabindex="-1"])'
-    )
-  );
-  // const modal = document.querySelector('#exampleModal'); // select the modal by it's id
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
-
-  document.addEventListener("keydown", (e) => {
-    const isTabPressed = e.key === "Tab" || e.code === "9";
-    if (!isTabPressed) {
-      return;
-    }
-
-    if (e.shiftKey) {
-      // if shift key pressed for shift + tab combination
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement.focus(); // add focus for the last focusable element
-        e.preventDefault();
-      }
-    } else if (document.activeElement === lastFocusableElement) {
-      firstFocusableElement.focus();
-      e.preventDefault();
-    }
-  });
-  firstFocusableElement.focus();
-};
-
-const contactModal = querySelector("#contact-modal");
-
-const onOpenContactModal = () => {
-  onModal(contactModal);
-  trapFocus(contactModal);
-};
-//
-const onCloseContactModal = () => {
-  onModal(contactModal);
-};
-
-const onEnterClick = (target) => {
-  target.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      event.target.click();
-      event.preventDefault();
-    }
-  });
-};
-
-const onEscapeClick = (target) => {
-  target.addEventListener("keypress", (event) => {
-    if (event.key === "Escape") {
-      event.target.click();
-      event.preventDefault();
-    }
-  });
-};
-
-// **************
+import {
+  contactAcces,
+  openContactForm,
+  clearForm,
+  formValidation,
+  messageCheck,
+  emailCheck,
+  namesCheck,
+} from "../utils/contactAcces.js";
 
 export default class FormModal {
   constructor(photographerName) {
     this.photographerName = photographerName;
-    this.$wrapperForm = document.createElement("div");
-    setAttribute("modal", this.$wrapperForm);
-    this.wrapperModal = getElementById("contact-modal");
-    this.wrapperModal.setAttribute("aria-labelledBy", "formTitle");
+    this.formContents = document.createElement("div");
+    setAttribute("modal", this.formContents);
+    this.formModal = getElementById("contact-modal");
+    this.formModal.setAttribute("aria-labelledBy", "formTitle");
   }
 
-  //* ******************** DISPLAY MESSAGES  ***********************************/
-  // clear validation message
-  clearValidationMessage(element) {
-    element.closest(".formData").setAttribute("data-error-visible", "false");
-    element.closest(".formData").setAttribute("data-error", "");
-  }
-
-  // set validation message
-  setValidationMessage(element, message) {
-    element.closest(".formData").setAttribute("data-error-visible", "true");
-    element.closest(".formData").setAttribute("data-error", message);
-  }
-
-  //* ******************** CHECK FUNCTIONS  ***********************************/
-  // check names function
-  namesCheck(name) {
-    if (!/^([a-zA-Z\u00C0-\u00FF]{2,}\s*)+$/.test(name.value) || name === "") {
-      this.setValidationMessage(
-        name,
-        "Veuillez saisir des lettres seulement !"
-      );
-      return false;
-    }
-    this.clearValidationMessage(name);
-    return true;
-  }
-
-  // check email function
-  emailCheck(email) {
-    if (
-      !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/.test(email.value) ||
-      email === ""
-    ) {
-      this.setValidationMessage(
-        email,
-        "Veuillez saisir une adresse e-mail valide !"
-      );
-      return false;
-    }
-    this.clearValidationMessage(email);
-    return true;
-  }
-
-  //* ******************** FORM VALIDATION  ***********************************/
-  formValidation(firstName, lastName, email, modalSubmit, formContent) {
-    // check all fields
-    if (
-      this.namesCheck(firstName) &&
-      this.namesCheck(lastName) &&
-      this.emailCheck(email)
-    ) {
-      this.clearValidationMessage(modalSubmit);
-      // display json in logs
-      const data = new FormData(formContent);
-      const value = Object.fromEntries(data.entries());
-      
-      this.clearForm(formContent, closeModal);
-      return true;
-    }
-    // display required message
-    this.setValidationMessage(
-      modalSubmit,
-      "Veuillez compléter les champs obligatoires !"
-    );
-    return false;
-  }
-
-  // form reset
-  clearForm(formContent) {
-    formContent.style.display = "block";
-    formContent.reset();
-    onCloseContactModal(getElementById("contact-modal"));
-  }
-
-  // Events handler
   handleEvents() {
-    // DOM $Wrapper
-    const form = this.$wrapperForm;
-    // Modal
+    const form = this.formContents;
     const modal = getElementById("contact-modal");
-    // Buttons
     const contactButton = querySelector(".contact_button");
     const modalSubmit = querySelector(".submit_button", form);
     const closeModal = querySelector("#closeModal", form);
-    // Form & Success
     const formContent = querySelector("#contactForm", form);
-    // Fileds
     const firstName = querySelector("#first", form);
     const lastName = querySelector("#last", form);
     const email = querySelector("#email", form);
+    const message = querySelector("#message", form);
 
-    // EVENTS
     modalSubmit.addEventListener("click", () => {
-      this.formValidation(firstName, lastName, email, modalSubmit, formContent);
+      formValidation(
+        firstName,
+        lastName,
+        email,
+        message,
+        modalSubmit,
+        formContent
+      );
     });
     contactButton.addEventListener("click", (target) => {
-      onOpenContactModal(modal);
+      openContactForm(modal);
       firstName.focus();
     });
     closeModal.addEventListener("click", () => {
-      this.clearForm(formContent, closeModal);
+      clearForm(formContent, closeModal);
     });
     firstName.addEventListener("change", () => {
-      this.namesCheck(firstName);
+      namesCheck(firstName);
     });
     lastName.addEventListener("change", () => {
-      this.namesCheck(lastName);
+      namesCheck(lastName);
     });
     email.addEventListener("change", () => {
-      this.emailCheck(email);
+      emailCheck(email);
+    });
+    message.addEventListener("change", () => {
+      messageCheck(message);
     });
     modal.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
@@ -205,14 +73,14 @@ export default class FormModal {
       }
     });
     modal.style.display = "none";
-    onEnterClick(modalSubmit);
-    onEnterClick(closeModal);
-    onEscapeClick(modal);
+    clickSimulation(modalSubmit);
+    clickSimulation(closeModal);
+    clickSimulation(modal);
   }
 
-  getFormRender() {
-    // DOM Wrapper Generate the form
-    this.$wrapperForm.innerHTML = `
+  // Rendu du formulaire
+  formRender() {
+    this.formContents.innerHTML = `
                         <header> 
                           <h2 id="formTitle">Contactez-moi ${this.photographerName}</h2>
                           <img id="closeModal" role="button" src="assets/icons/close.svg" alt="Fermer le formulaire de contacte" tabindex="1" />
@@ -251,6 +119,6 @@ export default class FormModal {
                           </div>
                         </form>`;
     this.handleEvents();
-    appendChild(this.$wrapperForm, this.wrapperModal);
+    appendChild(this.formContents, this.formModal);
   }
 }

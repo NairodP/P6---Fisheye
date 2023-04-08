@@ -1,59 +1,11 @@
 import {
+  clickSimulation,
   querySelector,
   appendChild,
-  classListToggle,
   setAttribute,
-} from "../utils/shortcutDom.js";
+} from "../utils/genRaccourci.js";
 
-const body = document.querySelector("body");
-const main = document.querySelector("#main");
-
-function onModal(target) {
-  main.style.display = main.style.display === "none" ? "block" : "none";
-  classListToggle("no-scroll", body);
-  target.toggleAttribute("aria-hidden");
-  target.style.display = target.style.display === "none" ? "block" : "none";
-}
-
-const trapFocus = (modal) => {
-  const focusableElements = Array.from(
-    modal.querySelectorAll(
-      'button[type=submit], i[tabindex="1"], img[id="closeModal"], input, textarea, li[class="active-item"], [tabindex]:not([tabindex="-1"])'
-    )
-  );
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
-  document.addEventListener("keydown", (e) => {
-    const isTabPressed = e.key === "Tab" || e.code === "9";
-    if (!isTabPressed) {
-      return;
-    }
-    if (e.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement.focus();
-        e.preventDefault();
-      }
-    } else if (document.activeElement === lastFocusableElement) {
-      firstFocusableElement.focus();
-      e.preventDefault();
-    }
-  });
-  firstFocusableElement.focus();
-};
-const lightboxModal = querySelector(".lightbox_modal");
-const onOpenLightboxModal = () => {
-  onModal(lightboxModal);
-  trapFocus(lightboxModal);
-};
-const onEnterClick = (target) => {
-  target.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      event.target.click();
-      event.preventDefault();
-    }
-  });
-};
-// *************
+import { openCarroussel } from "../utils/carrousselAcces.js";
 
 export default class MediaCard {
   constructor(media) {
@@ -66,39 +18,34 @@ export default class MediaCard {
     this.type = type;
     this.link = link;
     this.position = position;
-
-    // Dom el
-    this.$wrapperMedia = document.createElement("article");
-    this.wrapperMedia = querySelector(".photograph_media");
+    this.mediaContent = document.createElement("article");
+    this.mediaSection = querySelector(".photograph_media");
   }
 
-  // Events handler
   mediaEventsHandler() {
-    // DOM $Wrapper
-    const media = this.$wrapperMedia;
+    const media = this.mediaContent;
     const likes = querySelector(".likes", media);
     const icone = querySelector("i", media);
-    let box;
+    let card;
 
-    // Buttons
-    if (this.type === "ImageM") {
-      box = querySelector("img", media);
-    } else if (this.type === "VideoM") {
-      box = querySelector(".playMask", media);
+    if (this.type === "ImageMedia") {
+      card = querySelector("img", media);
+    } else if (this.type === "VideoMedia") {
+      card = querySelector(".playMask", media);
     }
 
-    // EVENTS
-    box.addEventListener("click", () => {
+    // Event d'une card au carroussel
+    card.addEventListener("click", () => {
       const item = querySelector(`li[data-name="item-${this.position}"]`);
-      this.type === "ImageM"
+      this.type === "ImageMedia"
         ? setAttribute("active-item", item)
         : setAttribute("active-item-video", item);
-      onOpenLightboxModal();
+      openCarroussel();
       querySelector("#close").focus();
     });
-    onEnterClick(box);
+    clickSimulation(card);
 
-    // Likes
+    // Gestionnaire des likes
     icone.addEventListener("click", () => {
       const totalLikes = querySelector(".totalLikes");
       if (this.likes == likes.textContent) {
@@ -111,17 +58,17 @@ export default class MediaCard {
         icone.classList.remove("active-heart");
       }
     });
-    onEnterClick(icone);
+    clickSimulation(icone);
   }
 
+  // Rendu d'une card
   getMediaCardDOM() {
-    // Generate the media cards
     let media = "";
     const index = this.position + 4;
-    if (this.type === "ImageM") {
+    if (this.type === "ImageMedia") {
       media = `<img src="${this.link}" alt="${this.title}, closeup view" aria-label="Photo de ${this.title}"  tabindex="${index}"> `;
-    } else if (this.type === "VideoM") {
-      media = `<video class="player" aria-hidden="true" tabindex="-1">
+    } else if (this.type === "VideoMedia") {
+      media = `<video class="player" aria-hidden="true" tabindex="1">
                 <source src="${this.link}" type="video/mp4" />
               </video>
               <div class="playMask" tabindex="${index}">
@@ -136,11 +83,12 @@ export default class MediaCard {
                 </i>
               </div>`;
 
-    this.$wrapperMedia.innerHTML = media;
+    this.mediaContent.innerHTML = media;
     this.mediaEventsHandler();
-    appendChild(this.$wrapperMedia, this.wrapperMedia);
+    appendChild(this.mediaContent, this.mediaSection);
 
     const player = new Plyr("video");
+    // console.log(player);
     window.player = player;
   }
 }
