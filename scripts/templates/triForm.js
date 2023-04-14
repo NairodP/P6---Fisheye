@@ -6,16 +6,8 @@ import {
   setAttribute,
   classListToggle,
   appendChild,
+  clickSimulation,
 } from "../utils/genRaccourci.js";
-
-const onEnterClick = (target) => {
-  target.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      event.target.click();
-      event.preventDefault();
-    }
-  });
-};
 
 export default class SorterForm {
   constructor(medias, name) {
@@ -94,7 +86,7 @@ export default class SorterForm {
         bestSorter.click();
       }
     });
-    onEnterClick(dropdown);
+    clickSimulation(dropdown);
     this.sorterMovies("POPULARITE");
   }
 
@@ -117,32 +109,6 @@ export default class SorterForm {
                             <input type="radio" name="sorttitle" role="selectSorter" value="TITRE" id="sort-title" aria-labelledBy="titleLabel">
                                 <label id="titleLabel" for="sort-title" class="unselected" aria-label="Trier par titre" tabindex="3">Titre</label>
                         </span>`;
-    // const sorterForm = `<label id="dropdownForSort">Trier par : </label>
-    //                     <form class="bg">
-    //                       <div class="select" tabindex="1">
-    //                         <i class="fa-solid fa-chevron-up" style="color: #000000;"></i>
-    //                         <input
-    //                           class="selectopt"
-    //                           name="test"
-    //                           type="radio"
-    //                           id="opt1"
-    //                           checked
-    //                           tabindex="0"
-    //                         />
-    //                         <label for="opt1" class="option" tabindex="0">
-    //                           <span class="border-top"></span>
-    //                         Date</label>
-    //                         <input class="selectopt" name="test" type="radio" id="opt2" tabindex="0" />
-    //                         <label for="opt2" class="option">
-    //                           <span class="border-top"></span>
-    //                         Popularité</label>
-    //                         <input class="selectopt" name="test" type="radio" id="opt3" tabindex="0" />
-    //                         <label for="opt3" class="option">
-    //                           <span class="border-top"></span>
-    //                         Titre</label>
-    //                       </div>
-    //                     </form>`;
-
     this.$wrapper.innerHTML = sorterForm;
     this.onChangeSorter();
     appendChild(this.$wrapper, this.$sorterFormWrapper);

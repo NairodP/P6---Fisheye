@@ -1,0 +1,147 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+label[for="dropdown"] {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.filtre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dropdown {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 170px;
+  max-height: 70px;
+  font-size: 20px;
+  font-weight: normal;
+  color: white;
+  background-color: #901c1c;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  padding: 11px 11px 11px 0;
+  margin-left: 10px;
+}
+
+#dropdown.active {
+  border-radius: 5px;
+}
+
+#dropdown #selected-option {
+  display: inline-block;
+  width: 80%;
+  height: 100%;
+  padding-left: 25px;
+}
+
+#dropdown:not(.active) svg#chevron {
+  transform: translateY(50%) rotateX(180deg);
+}
+
+#dropdown svg {
+  position: absolute;
+  width: 20px;
+  padding: 0;
+  margin: 0;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform .25s cubic-bezier(.85,.44,.15,.87);
+  transform-origin: top; /* changer le point d'origine de la rotation */
+
+}
+
+#dropdown ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+  display: block;
+}
+
+#dropdown ol.filtreInvisible {
+  display: none;
+}
+
+[role="selectionFiltre"] {
+  box-sizing: border-box;
+  list-style-type: none;
+  margin: 0;
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  background-color: #901c1c;
+  border-radius: 0;
+  position: relative;
+  padding: 10px 0;
+  padding-left: 25px;
+}
+
+#dropdown ol li.hidden {
+  display: none;
+}
+
+.roundedBottom {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* trait du bas pour les 3 */
+.roundedBottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background-color: white;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+}
+
+/* trait du haut pour titre et date */
+#dropdown ol li[aria-selected="false"]:first-of-type::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background-color: white;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+}
+
+/* trait du haut pour pop */
+#dropdown ol li#dateFiltre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background-color: white;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+}
+
+p {
+  display: flex;
+}

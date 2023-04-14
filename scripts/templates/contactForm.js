@@ -4,6 +4,7 @@ import {
   setAttribute,
   querySelector,
   clickSimulation,
+  focusInside,
 } from "../utils/genRaccourci.js";
 
 import {
@@ -47,7 +48,7 @@ export default class FormModal {
         formContent
       );
     });
-    contactButton.addEventListener("click", (target) => {
+    contactButton.addEventListener("click", () => {
       openContactForm(modal);
       firstName.focus();
     });

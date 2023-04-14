@@ -45,50 +45,82 @@ export function openAndClose(target) {
   }
 }
 
+// Pour les vérifs sur le carousel
 function checkElementFocus(element) {
-  const cible = querySelector(".carousel", document)
   element.addEventListener("focus", function () {
     console.log(element);
   });
 }
 
+const contactModal = getElementById("contact-modal");
+const carrousselModal = getElementById("carroussel-modal");
+
 export function focusInside(modal) {
-  const focusableElements = Array.from(
-    modal.querySelectorAll(
-      '[href], input, select, textarea, li[class="active-item"], li[class="active-item-video"], [tabindex]:not([tabindex="-1"])'
-    )
-  );
-  const firstFocusableElement = focusableElements[0];
-  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+  console.log(modal);
+  if (contactModal.style.display === "block") {
+    const focusableElements = Array.from(
+      modal.querySelectorAll(
+        'img, input, textarea'
+      )
+    ).slice(0, 6); // On récupère les 6 premiers éléments focusables correspondant aux elts du formulaire
 
-  modal.addEventListener("keydown", (event) => {
-    const isTabPressed = event.key === "Tab" || event.code === "9";
-    if (!isTabPressed) {
-      return;
-    }
-    if (event.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement.focus();
-        event.preventDefault();
+    modal.addEventListener("keydown", (event) => {
+      const isTabPressed = event.key === "Tab" || event.code === "9";
+      if (!isTabPressed) {
+        return;
       }
-    } else if (document.activeElement === lastFocusableElement) {
-      firstFocusableElement.focus();
-      event.preventDefault();
-    }
-  });
+      const index = focusableElements.indexOf(document.activeElement);
+      if (event.shiftKey) {
+        if (document.activeElement === focusableElements[0]) {
+          focusableElements[focusableElements.length - 1].focus();
+          event.preventDefault();
+        } else {
+          focusableElements[index - 1].focus();
+          event.preventDefault();
+        }
+      } else {
+        if (
+          document.activeElement ===
+          focusableElements[focusableElements.length - 1]
+        ) {
+          focusableElements[0].focus();
+          event.preventDefault();
+        } else {
+          focusableElements[index + 1].focus();
+          event.preventDefault();
+        }
+      }
+    });
 
-  firstFocusableElement.focus();
-
-  const list = querySelector(".carousel", document);
-  console.log(list);
+    focusableElements[0].focus(); // On met le focus sur le premier élément du tableau
+  } else {
+    const focusableElements = Array.from(
+      modal.querySelectorAll(
+        'button[type=submit], i[tabindex="1"], img[id="closeModal"], input, textarea, li[class="active-item"], [tabindex]:not([tabindex="-1"])'
+      )
+    );
+    // const modal = document.querySelector('#exampleModal'); // select the modal by it's id
+    const firstFocusableElement = focusableElements[0];
+    const lastFocusableElement = focusableElements[focusableElements.length - 1];
   
-  if (checkElementFocus(list)) {
-
-    const active = document.querySelector(".active-item-video");
-    const activeVideo = active.querySelector(".player");
-
-    console.log("ca marche");
-    activeVideo.plyr.play();
+    document.addEventListener("keydown", (e) => {
+      const isTabPressed = e.key === "Tab" || e.code === "9";
+      if (!isTabPressed) {
+        return;
+      }
+  
+      if (e.shiftKey) {
+        // if shift key pressed for shift + tab combination
+        if (document.activeElement === firstFocusableElement) {
+          lastFocusableElement.focus(); // add focus for the last focusable element
+          e.preventDefault();
+        }
+      } else if (document.activeElement === lastFocusableElement) {
+        firstFocusableElement.focus();
+        e.preventDefault();
+      }
+    });
+    firstFocusableElement.focus();
   }
 }
 

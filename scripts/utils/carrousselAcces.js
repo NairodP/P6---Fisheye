@@ -5,19 +5,19 @@ import {
   focusInside,
 } from "../utils/genRaccourci.js";
 
-function clickAtCenter(element) {
-  const rect = element.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-  element.dispatchEvent(
-    new MouseEvent("click", {
-      bubbles: true,
-      cancelable: true,
-      clientX: x,
-      clientY: y,
-    })
-  );
-}
+// function clickAtCenter(element) {
+//   const rect = element.getBoundingClientRect();
+//   const x = rect.left + rect.width / 2;
+//   const y = rect.top + rect.height / 2;
+//   element.dispatchEvent(
+//     new MouseEvent("click", {
+//       bubbles: true,
+//       cancelable: true,
+//       clientX: x,
+//       clientY: y,
+//     })
+//   );
+// }
 
 const carroussel = getElementById("carroussel-modal");
 
@@ -76,18 +76,22 @@ export function closeCarroussel() {
 
 export function playVideoOnEnterOrSpace(event) {
   const carouFocus = document.querySelector(".carousel");
-  console.log(carouFocus);
 
-  carouFocus.addEventListener("focus", function (event) {
+  if (carouFocus === document.activeElement && (event.code === "Enter" || event.key === "Enter" ||  event.code === "Space" || event.key === " ")) {
     const active = document.querySelector(".active-item-video");
-    console.log(active);
-    const activeVideo = active.querySelector(".player");
-    console.log(activeVideo);
-    if (
-      (event.key === "Enter" || event.key === " ") &&
-      active === document.activeElement
-    ) {
-      activeVideo.plyr.play();
+
+    if (active) {
+      const activeVideo = active.querySelector(".player");
+      if (activeVideo.plyr.playing) {
+        activeVideo.plyr.pause();
+      } else {
+        activeVideo.plyr.play();
+      }
     }
-  });
+  }
+}
+
+export function initVideoPlayer() {
+  const player = new Plyr(".player");
+  document.addEventListener("keydown", playVideoOnEnterOrSpace);
 }

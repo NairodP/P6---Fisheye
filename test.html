@@ -1,51 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/test.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-
-    <title>Document</title>
+    <title>Menu déroulant accessible</title>
+    <link rel="stylesheet" href="test.css" />
   </head>
   <body>
     <div class="filtre">
-      <label id="dropdownForSort">Trier par : </label>
-        <div class="select" tabindex="1">
-          <i class="fa-regular fa-chevron-up"></i>
-          <input
-            class="selectopt"
-            name="test"
-            type="radio"
-            id="opt1"
-            checked
-            tabindex="0"
-          />
-          <label for="opt1" class="option" tabindex="0"
-            ><span class="border-top"></span>Date</label
+      <label for="dropdown">Trier par :</label>
+      <div
+        id="dropdown"
+        class="active"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-owns="dropdown-options"
+        role="displayButton"
+        tabindex="0"
+      >
+        <span id="selected-option" data-value="Popularité" tabindex="3"></span>
+        <svg id="chevron" viewBox="0 0 24 24" fill="#ffffff">
+          <polyline
+            fill="none"
+            id="Down"
+            points="5 8.5 12 15.5 19 8.5"
+            stroke="#ffffff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          ></polyline>
+        </svg>
+        <ol class="filtreInvisible" aria-hidden="true">
+          <li
+            id="popFiltre"
+            tabindex="3"
+            name="sortbest"
+            value="POPULARITE"
+            aria-label="Trier par popularité"
+            aria-selected="false"
+            data-value="Popularité"
+            role="selectionFiltre"
           >
-          <input
-            class="selectopt"
-            name="test"
-            type="radio"
-            id="opt2"
-            tabindex="0"
-          />
-          <label for="opt2" class="option"
-            ><span class="border-top"></span>Popularité</label
+            Popularité
+          </li>
+          <li
+            id="dateFiltre"
+            tabindex="3"
+            name="sortdate"
+            value="DATE"
+            aria-label="Trier par date"
+            aria-selected="false"
+            data-value="Date"
+            role="selectionFiltre"
           >
-          <input
-            class="selectopt"
-            name="test"
-            type="radio"
-            id="opt3"
-            tabindex="0"
-          />
-          <label for="opt3" class="option"
-            ><span class="border-top"></span>Titre</label
+            Date
+          </li>
+          <li
+            id="titreFiltre"
+            tabindex="3"
+            name="sorttitle"
+            value="TITRE"
+            aria-label="Trier par titre"
+            aria-selected="false"
+            data-value="Titre"
+            role="selectionFiltre"
+            class="roundedBottom"
           >
-        </div>
+            Titre
+          </li>
+        </ol>
+      </div>
     </div>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ducimus alias eveniet, deserunt nihil non veniam dolorum facilis accusantium nobis ex, minima architecto ipsam minus aliquam porro reiciendis. Labore rem, optio ipsam in eos sint ducimus distinctio neque explicabo magni minus amet, delectus nostrum, ullam sit velit accusamus dolores voluptatem officiis? Illum voluptate hic ullam nesciunt quia doloribus, necessitatibus assumenda at repellendus aliquid minus ab consequatur recusandae quidem maxime! Temporibus fugit nemo laborum dolorem fuga? Hic iusto obcaecati corporis dolor facere suscipit molestias voluptatum voluptatem quis illo quasi, enim quae tempora dicta a. Impedit commodi officia ex fuga ipsa odio cupiditate corporis sit molestias perspiciatis fugit ea dicta excepturi, reiciendis, ipsam tenetur soluta quam sed? At odit fugit aperiam numquam ipsam eum unde hic, repellat beatae, consectetur commodi nesciunt est similique. Quia officiis voluptates qui assumenda et quae numquam error neque sapiente accusantium! Ipsam debitis qui voluptate. Numquam est repellendus suscipit eligendi eum architecto quos natus animi saepe adipisci. Labore magnam quae id iste nemo qui dolorem, commodi itaque sunt magni consequuntur doloribus fugit laboriosam impedit tempore vitae exercitationem! Ab debitis voluptatum nemo reprehenderit quo qui aspernatur, laudantium perspiciatis voluptatem corrupti nihil molestias vitae! Provident, corporis architecto doloremque eos porro nulla eveniet, tempora, quaerat eius quos non quasi ad adipisci. Corrupti voluptates voluptas aspernatur deleniti? Exercitationem eius incidunt ad, quis atque enim nemo! Ad quibusdam corporis incidunt quis ullam aut cupiditate molestiae voluptas sint, consectetur in laudantium dolores dolor adipisci unde rem itaque corrupti! Deserunt rem praesentium et asperiores optio labore suscipit? Neque aliquam dolorem minima aspernatur commodi dolor ex vero enim culpa amet quisquam velit adipisci a, quod asperiores iure temporibus fugiat fuga harum provident! Neque illo sint nulla corporis inventore commodi fugiat sapiente veritatis tempore aut soluta totam explicabo in rerum tenetur ea, laudantium quasi cupiditate amet provident sed expedita placeat quas ipsam. Nulla a reiciendis dolore odio unde cupiditate laboriosam repellendus perferendis alias recusandae vero, neque reprehenderit et corporis. Omnis iusto delectus vero velit odio ipsam, culpa quia corporis dolorem officia recusandae perspiciatis provident quas illum quis sint, dolore autem. Reiciendis ullam illum sed tempore deserunt inventore quia, quibusdam suscipit debitis laboriosam rerum ipsum voluptates quaerat vero. Sed mollitia nobis, enim odio quo distinctio illo dignissimos placeat autem harum asperiores, dolore quod amet quasi. Cumque ea odio libero ducimus similique esse deleniti deserunt voluptate earum, vitae id eum ipsam excepturi ipsa debitis culpa vel soluta nihil rem magni atque? Distinctio nesciunt autem consectetur odit, eum voluptates fugit ut molestiae odio consequatur minima impedit ipsa maiores reprehenderit harum laudantium nobis dolore facere officia in eligendi voluptas. Sit qui quae dolore dolor eius quis ex! Odit magni ducimus fugiat obcaecati inventore, omnis explicabo dolores repudiandae dolorum, mollitia consequuntur sequi ut illum quisquam! Sint facilis officia illum eius ab nemo vero doloribus unde voluptates cupiditate! Dignissimos cum eius ullam pariatur reprehenderit asperiores vitae quia unde odio dolorem aliquid, sequi non fugiat debitis quis impedit doloremque in aliquam tenetur itaque dolores quod. Laudantium cupiditate aliquid harum quae deleniti natus nobis reprehenderit.</p>
+    <script src="test.js"></script>
   </body>
 </html>

@@ -9,7 +9,7 @@ import {
 import {
   carrousselAcces,
   closeCarroussel,
-  // playVideoOnEnterOrSpace,
+  initVideoPlayer,
 } from "../utils/carrousselAcces.js";
 
 export default class Carroussel {
@@ -43,11 +43,7 @@ export default class Carroussel {
     const leftButton = querySelector(".fa-chevron-left", carroussel);
     const rightButton = querySelector(".fa-chevron-right", carroussel);
     const closeButton = querySelector(".fa-times", carroussel);
-    console.log(carroussel);
     
-
-
-
     rightButton.addEventListener("click", () => {
       const nextPosition = this.getActualPosition() + 1;
       const nextItem =
@@ -74,7 +70,7 @@ export default class Carroussel {
     clickSimulation(rightButton);
     clickSimulation(closeButton);
     carrousselAcces(this.modalCarroussel);
-    // playVideoOnEnterOrSpace(this.modalCarroussel);
+    initVideoPlayer();
   }
   carrousselRender() {
     this.carrousselContents.innerHTML = `<ul class="carousel" tabindex="1"></ul>
