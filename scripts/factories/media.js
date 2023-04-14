@@ -8,7 +8,9 @@ import * as Media from "../models/media.js";
 export default function mediaFactory(media) {
   if (media) {
     // Vérifie si media est une image ou une video avec une ternaire
-    const med = media.image ? new Media.ImageMedia(media) : new Media.VideoMedia(media);
+    const med = media.image
+      ? new Media.ImageMedia(media)
+      : new Media.VideoMedia(media);
     med.type = media.image ? "ImageMedia" : "VideoMedia";
     return med;
   }

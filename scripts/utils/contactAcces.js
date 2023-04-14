@@ -103,4 +103,3 @@ export function clearForm(formContent) {
   formContent.reset();
   closeContactForm(getElementById("contact-modal"));
 }
-

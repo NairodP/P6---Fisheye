@@ -5,7 +5,7 @@ import {
   setAttribute,
 } from "../utils/genRaccourci.js";
 
-import { openCarroussel } from "../utils/carrousselAcces.js";
+import { openCarousel } from "../utils/carouselAcces.js";
 
 export default class MediaCard {
   constructor(media) {
@@ -18,11 +18,12 @@ export default class MediaCard {
     this.type = type;
     this.link = link;
     this.position = position;
+    // console.log(position);
     this.mediaContent = document.createElement("article");
     this.mediaSection = querySelector(".photograph_media");
   }
 
-  mediaEventsHandler() {
+  eventsOnMedia() {
     const media = this.mediaContent;
     const likes = querySelector(".likes", media);
     const icone = querySelector("i", media);
@@ -34,13 +35,13 @@ export default class MediaCard {
       card = querySelector(".playMask", media);
     }
 
-    // Event d'une card au carroussel
+    // Event d'une card au carousel
     card.addEventListener("click", () => {
       const item = querySelector(`li[data-name="item-${this.position}"]`);
       this.type === "ImageMedia"
         ? setAttribute("active-item", item)
         : setAttribute("active-item-video", item);
-      openCarroussel();
+      openCarousel();
       querySelector("#close").focus();
     });
     clickSimulation(card);
@@ -62,7 +63,7 @@ export default class MediaCard {
   }
 
   // Rendu d'une card
-  getMediaCardDOM() {
+  mediaCard() {
     let media = "";
     const index = this.position + 4;
     if (this.type === "ImageMedia") {
@@ -84,7 +85,7 @@ export default class MediaCard {
               </div>`;
 
     this.mediaContent.innerHTML = media;
-    this.mediaEventsHandler();
+    this.eventsOnMedia();
     appendChild(this.mediaContent, this.mediaSection);
 
     const player = new Plyr("video");

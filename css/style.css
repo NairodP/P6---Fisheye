@@ -1,6 +1,6 @@
 :focus-visible {
-  outline: 3px solid rgb(13, 192, 0);  
-  border-radius: 10px; 
+  outline: 3px solid rgb(13, 192, 0);
+  border-radius: 10px;
 }
 
 body {
@@ -19,7 +19,7 @@ header {
 }
 
 main {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
 h1 {

@@ -1,4 +1,4 @@
-import carrousselMedia from "./carrousselMedia.js";
+import carouselMedia from "./carouselMedia.js";
 import MediaCard from "./mediaCard.js";
 import ProxyTri from "../proxy/proxyTri.js";
 import {
@@ -13,11 +13,10 @@ export default class SorterForm {
   constructor(medias, name) {
     this.medias = medias;
     this.name = name;
-    this.$wrapper = document.createElement("div");
-    this.$sorterFormWrapper = querySelector(".filtre");
+    this.afterFiltre = document.createElement("div");
+    this.filtreDiv = querySelector(".filtre");
     this.$mediasWrapper = querySelector(".photograph_media");
-    this.$carouselWrapper = querySelector(".carousel");
-
+    this.carouselDiv = querySelector(".carousel");
     this.ProxyTri = new ProxyTri();
   }
 
@@ -35,8 +34,8 @@ export default class SorterForm {
             ? media.getImage(this.name)
             : media.getVideo(this.name);
         media.position = position;
-        new carrousselMedia(media).MediaRender();
-        new MediaCard(media).getMediaCardDOM();
+        new carouselMedia(media).carouselMediaRender();
+        new MediaCard(media).mediaCard();
 
         position += 1;
       });
@@ -48,32 +47,32 @@ export default class SorterForm {
   unselect() {
     setAttribute(
       "unselected",
-      querySelector('label[for="sort-best"', this.$wrapper)
+      querySelector('label[for="sort-best"', this.afterFiltre)
     );
     setAttribute(
       "unselected",
-      querySelector('label[for="sort-date"', this.$wrapper)
+      querySelector('label[for="sort-date"', this.afterFiltre)
     );
     setAttribute(
       "unselected",
-      querySelector('label[for="sort-title"', this.$wrapper)
+      querySelector('label[for="sort-title"', this.afterFiltre)
     );
   }
 
   clearSelect() {
-    setAttribute("", querySelector('label[for="sort-best"', this.$wrapper));
-    setAttribute("", querySelector('label[for="sort-date"', this.$wrapper));
-    setAttribute("", querySelector('label[for="sort-title"', this.$wrapper));
+    setAttribute("", querySelector('label[for="sort-best"', this.afterFiltre));
+    setAttribute("", querySelector('label[for="sort-date"', this.afterFiltre));
+    setAttribute("", querySelector('label[for="sort-title"', this.afterFiltre));
   }
 
   onChangeSorter() {
     // Sorter management
-    const dropdown = this.$wrapper.querySelector(".dropdown-el");
-    const bestSorter = this.$wrapper.querySelector("#sort-best");
+    const dropdown = this.afterFiltre.querySelector(".dropdown-el");
+    const bestSorter = this.afterFiltre.querySelector("#sort-best");
     dropdown.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const selectedItem = querySelector(`#${e.target.htmlFor}`, this.$wrapper);
+      const selectedItem = querySelector(`#${e.target.htmlFor}`, this.afterFiltre);
       if (!dropdown.classList.contains("expanded")) {
         this.clearSelect();
         classListToggle("expanded", dropdown);
@@ -93,7 +92,7 @@ export default class SorterForm {
   clearWrappers() {
     // Reset media and carousel content
     this.$mediasWrapper.innerHTML = "";
-    this.$carouselWrapper.innerHTML = "";
+    this.carouselDiv.innerHTML = "";
   }
 
   render() {
@@ -109,8 +108,8 @@ export default class SorterForm {
                             <input type="radio" name="sorttitle" role="selectSorter" value="TITRE" id="sort-title" aria-labelledBy="titleLabel">
                                 <label id="titleLabel" for="sort-title" class="unselected" aria-label="Trier par titre" tabindex="3">Titre</label>
                         </span>`;
-    this.$wrapper.innerHTML = sorterForm;
+    this.afterFiltre.innerHTML = sorterForm;
     this.onChangeSorter();
-    appendChild(this.$wrapper, this.$sorterFormWrapper);
+    appendChild(this.afterFiltre, this.filtreDiv);
   }
 }

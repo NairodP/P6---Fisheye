@@ -46,22 +46,19 @@ export function openAndClose(target) {
 }
 
 // Pour les vérifs sur le carousel
-function checkElementFocus(element) {
-  element.addEventListener("focus", function () {
-    console.log(element);
-  });
-}
+// function checkElementFocus(element) {
+//   element.addEventListener("focus", function () {
+//     console.log(element);
+//   });
+// }
 
 const contactModal = getElementById("contact-modal");
-const carrousselModal = getElementById("carroussel-modal");
 
 export function focusInside(modal) {
   console.log(modal);
   if (contactModal.style.display === "block") {
     const focusableElements = Array.from(
-      modal.querySelectorAll(
-        'img, input, textarea'
-      )
+      modal.querySelectorAll("img, input, textarea")
     ).slice(0, 6); // On récupère les 6 premiers éléments focusables correspondant aux elts du formulaire
 
     modal.addEventListener("keydown", (event) => {
@@ -101,14 +98,15 @@ export function focusInside(modal) {
     );
     // const modal = document.querySelector('#exampleModal'); // select the modal by it's id
     const firstFocusableElement = focusableElements[0];
-    const lastFocusableElement = focusableElements[focusableElements.length - 1];
-  
+    const lastFocusableElement =
+      focusableElements[focusableElements.length - 1];
+
     document.addEventListener("keydown", (e) => {
       const isTabPressed = e.key === "Tab" || e.code === "9";
       if (!isTabPressed) {
         return;
       }
-  
+
       if (e.shiftKey) {
         // if shift key pressed for shift + tab combination
         if (document.activeElement === firstFocusableElement) {
@@ -126,13 +124,16 @@ export function focusInside(modal) {
 
 export function clickSimulation(target) {
   target.addEventListener("keydown", function (event) {
+    const elementType = event.target.tagName.toLowerCase();
     switch (event.code) {
       case "Space":
       case "Enter":
       case 32:
       case 13:
-        target.click();
-        event.preventDefault();
+        if (elementType !== "textarea") {
+          target.click();
+          event.preventDefault();
+        }
         break;
       default:
         return;

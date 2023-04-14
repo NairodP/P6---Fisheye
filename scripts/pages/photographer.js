@@ -3,13 +3,13 @@ import PhotographerCard from "../templates/photographerCard.js";
 import { querySelector, appendChild } from "../utils/genRaccourci.js";
 import FormModal from "../templates/contactForm.js";
 import triForm from "../templates/triForm.js";
-import Carroussel from "../templates/carousel.js";
+import Carousel from "../templates/carousel.js";
 
 class PhotographerPage {
   renderGallery(medias, photographer) {
     const { name } = photographer;
     const card = new PhotographerCard(photographer);
-    const carroussel = new Carroussel(name);
+    const carousel = new Carousel(name);
 
     // display photographer's likes
     let likes = 0;
@@ -33,7 +33,7 @@ class PhotographerPage {
     const form = new FormModal(photographer.name);
     form.formRender();
     // Create Modal Lightbox
-    carroussel.carrousselRender();
+    carousel.carouselRender();
     // display media's gallery
     new triForm(medias, name).render();
   }

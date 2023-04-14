@@ -7,16 +7,16 @@ import {
 } from "../utils/genRaccourci.js";
 
 import {
-  carrousselAcces,
-  closeCarroussel,
+  carouselAcces,
+  closeCarousel,
   initVideoPlayer,
-} from "../utils/carrousselAcces.js";
+} from "../utils/carouselAcces.js";
 
-export default class Carroussel {
+export default class Carousel {
   constructor(photographerName) {
     this.name = photographerName;
-    this.modalCarroussel = querySelector("#carroussel-modal");
-    this.carrousselContents = document.createElement("div");
+    this.modalCarousel = querySelector("#carousel-modal");
+    this.carouselContents = document.createElement("div");
   }
   getActualItem() {
     return querySelector(".active-item") || querySelector(".active-item-video");
@@ -38,12 +38,12 @@ export default class Carroussel {
   setCarouselItem(item) {
     setAttribute("carousel-item", item);
   }
-  carrousselEventsHandler() {
-    const carroussel = this.carrousselContents;
-    const leftButton = querySelector(".fa-chevron-left", carroussel);
-    const rightButton = querySelector(".fa-chevron-right", carroussel);
-    const closeButton = querySelector(".fa-times", carroussel);
-    
+  eventsOnCarousel() {
+    const carousel = this.carouselContents;
+    const leftButton = querySelector(".fa-chevron-left", carousel);
+    const rightButton = querySelector(".fa-chevron-right", carousel);
+    const closeButton = querySelector(".fa-times", carousel);
+
     rightButton.addEventListener("click", () => {
       const nextPosition = this.getActualPosition() + 1;
       const nextItem =
@@ -62,22 +62,22 @@ export default class Carroussel {
       this.setActiveItem(previousItem);
     });
     closeButton.addEventListener("click", () => {
-      closeCarroussel(this.modalCarroussel);
+      closeCarousel(this.modalCarousel);
       this.setCarouselItem(this.getActualItem());
     });
-    this.modalCarroussel.style.display = "none";
+    this.modalCarousel.style.display = "none";
     clickSimulation(leftButton);
     clickSimulation(rightButton);
     clickSimulation(closeButton);
-    carrousselAcces(this.modalCarroussel);
+    carouselAcces(this.modalCarousel);
     initVideoPlayer();
   }
-  carrousselRender() {
-    this.carrousselContents.innerHTML = `<ul class="carousel" tabindex="1"></ul>
+  carouselRender() {
+    this.carouselContents.innerHTML = `<ul class="carousel" tabindex="1"></ul>
             <em class="fas fa-chevron-left" id="previous"  aria-label="Image précédente" tabindex="1"></em> 
             <em class="fas fa-chevron-right"  id="next" aria-label="Image suivante" tabindex="1"></em>
             <em class="fas fa-times" id="close" aria-label="Fermer la lightbox" tabindex="1"></em>`;
-    this.carrousselEventsHandler();
-    appendChild(this.carrousselContents, this.modalCarroussel);
+    this.eventsOnCarousel();
+    appendChild(this.carouselContents, this.modalCarousel);
   }
 }

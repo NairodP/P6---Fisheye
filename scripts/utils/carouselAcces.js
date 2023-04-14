@@ -3,7 +3,7 @@ import {
   getElementById,
   openAndClose,
   focusInside,
-} from "../utils/genRaccourci.js";
+} from "./genRaccourci.js";
 
 // function clickAtCenter(element) {
 //   const rect = element.getBoundingClientRect();
@@ -19,13 +19,13 @@ import {
 //   );
 // }
 
-const carroussel = getElementById("carroussel-modal");
+const carousel = getElementById("carousel-modal");
 
-export function carrousselAcces(target) {
+export function carouselAcces(target) {
   target.addEventListener("keydown", function (event) {
-    const flecheGauche = querySelector(".fa-chevron-left", carroussel);
-    const flecheDroite = querySelector(".fa-chevron-right", carroussel);
-    const fermer = querySelector(".fa-times", carroussel);
+    const flecheGauche = querySelector(".fa-chevron-left", carousel);
+    const flecheDroite = querySelector(".fa-chevron-right", carousel);
+    const fermer = querySelector(".fa-times", carousel);
 
     switch (event.code) {
       case 27: // escape
@@ -64,20 +64,25 @@ export function carrousselAcces(target) {
   });
 }
 
-export function openCarroussel() {
-  openAndClose(carroussel);
-  focusInside(carroussel);
+export function openCarousel() {
+  openAndClose(carousel);
+  focusInside(carousel);
 }
 
-export function closeCarroussel() {
-  openAndClose(carroussel);
+export function closeCarousel() {
+  openAndClose(carousel);
 }
-
 
 export function playVideoOnEnterOrSpace(event) {
   const carouFocus = document.querySelector(".carousel");
 
-  if (carouFocus === document.activeElement && (event.code === "Enter" || event.key === "Enter" ||  event.code === "Space" || event.key === " ")) {
+  if (
+    carouFocus === document.activeElement &&
+    (event.code === "Enter" ||
+      event.key === "Enter" ||
+      event.code === "Space" ||
+      event.key === " ")
+  ) {
     const active = document.querySelector(".active-item-video");
 
     if (active) {
