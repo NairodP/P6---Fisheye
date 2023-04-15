@@ -1,3 +1,5 @@
+// PROJET OPENCLASSROOMS
+
 Site web de photographie 100% accessible
 
 Bienvenue sur le site web de photographie entièrement accessible aux utilisateurs en situation de handicap !
