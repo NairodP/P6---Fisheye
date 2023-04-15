@@ -1,7 +1,7 @@
 // affiche les données de la page principale
 
 import * as Api from "../api/Api.js";
-import PhotographerCard from "../templates/photographerCard.js";
+import PhotographerCard from "../components/photographerCard.js";
 
 class HomePage {
   async init() {

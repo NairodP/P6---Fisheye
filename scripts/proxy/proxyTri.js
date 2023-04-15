@@ -1,4 +1,4 @@
-// utilisé dans templates/triForm
+// utilisé dans components/triForm
 
 // ajoute une couche de cache pour stocker les résultats du tri précédent afin de ne pas avoir à effectuer une nouvelle requête de tri si les données sont les mêmes
 // méthode sorter recherche d'abord si les données sont présentes dans le cache. Si oui, retourne les données triées à partir du cache. Sinon, appelle la méthode sortData de la class TriApi pour trier les données, stocke le résultat dans le cache et retourne les données triées.

@@ -1,9 +1,9 @@
 import * as Api from "../api/Api.js";
-import PhotographerCard from "../templates/photographerCard.js";
+import PhotographerCard from "../components/photographerCard.js";
 import { querySelector, appendChild } from "../utils/genRaccourci.js";
-import FormModal from "../templates/contactForm.js";
-import triForm from "../templates/triForm.js";
-import Carousel from "../templates/carousel.js";
+import FormModal from "../components/contactForm.js";
+import triForm from "../components/triForm.js";
+import Carousel from "../components/carousel.js";
 
 // Définition de la classe "PhotographerPage"
 class PhotographerPage {

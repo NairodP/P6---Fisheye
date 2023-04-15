@@ -1,6 +1,8 @@
 export default class carouselMedia {
   constructor(media) {
+    // destructuring pour extraire les propriétés de l'objet 'media'
     const { id, title, link, type, position } = media;
+    // assigner les propriétés aux variables de l'instance de classe
     this.id = id;
     this.title = title;
     this.mediaType = type;
@@ -14,6 +16,7 @@ export default class carouselMedia {
 
   carouselMediaRender() {
     let card = "";
+    // génére le code HTML en fonction du type de media
     if (this.mediaType === "ImageMedia") {
       card = `<img src="${this.mediaLink}" alt="${this.title}" title="Photo de ${this.title}">`;
     } else if (this.mediaType === "VideoMedia") {
@@ -24,11 +27,11 @@ export default class carouselMedia {
     }
     card += `<h3 class="item-title">${this.title}</h3>`;
 
+    // lie le code html créé aux éléments du DOM
     this.carouselLi.innerHTML = card;
     this.carouselDiv.appendChild(this.carouselLi);
 
     // Plyr (importé depuis cdn) permet d'implémenter tout le gestionnaire de video
     const player = new Plyr("video");
-    window.player = player;
   }
 }

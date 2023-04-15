@@ -5,20 +5,6 @@ import {
   focusInside,
 } from "./genRaccourci.js";
 
-// function clickAtCenter(element) {
-//   const rect = element.getBoundingClientRect();
-//   const x = rect.left + rect.width / 2;
-//   const y = rect.top + rect.height / 2;
-//   element.dispatchEvent(
-//     new MouseEvent("click", {
-//       bubbles: true,
-//       cancelable: true,
-//       clientX: x,
-//       clientY: y,
-//     })
-//   );
-// }
-
 const carousel = getElementById("carousel-modal");
 
 export function carouselAcces(target) {
