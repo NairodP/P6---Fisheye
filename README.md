@@ -1,4 +1,5 @@
 Site web de photographie 100% accessible
+
 Bienvenue sur le site web de photographie entièrement accessible aux utilisateurs en situation de handicap !
 
 Nous sommes fiers de vous présenter un site web de photographie accessible à tous. Nous avons mis en place des fonctionnalités spécifiques pour permettre une utilisation fluide et agréable pour les personnes malvoyantes ou atteintes d'autres handicaps.
