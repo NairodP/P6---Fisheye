@@ -65,11 +65,11 @@ export default class MediaCard {
   // Rendu d'une card
   mediaCard() {
     let media = "";
-    const index = this.position + 4;
+    const index = this.position + 3;
     if (this.type === "ImageMedia") {
       media = `<img src="${this.link}" alt="${this.title}, closeup view" aria-label="Photo de ${this.title}"  tabindex="${index}"> `;
     } else if (this.type === "VideoMedia") {
-      media = `<video class="player" aria-hidden="true" tabindex="1">
+      media = `<video class="player" aria-hidden="true">
                 <source src="${this.link}" type="video/mp4" />
               </video>
               <div class="playMask" tabindex="${index}">

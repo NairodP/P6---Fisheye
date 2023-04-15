@@ -35,7 +35,7 @@ class PhotographerPage {
     // Create Modal Lightbox
     carousel.carouselRender();
     // display media's gallery
-    new triForm(medias, name).render();
+    new triForm(medias, name).renderFiltre();
   }
 
   async init() {

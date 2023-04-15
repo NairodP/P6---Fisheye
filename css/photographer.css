@@ -181,8 +181,15 @@ input {
   position: relative;
   font-size: 1.4em;
   font-weight: 600;
+  align-items: center;
 }
-.filtre .dropdown-el {
+
+div.filtre > :first-child {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+/* .filtre .dropdown-el {
   position: absolute;
   max-height: 2em;
   overflow: hidden;
@@ -243,32 +250,39 @@ input {
 .filtre .dropdown-el.expanded::after {
   transform: rotate(-180deg);
   top: 1em;
-}
+} */
 
 /* ///////////////////////// */
 
 label[for="dropdown"] {
   font-size: 22px;
   font-weight: 500;
+  margin: auto 0;
 }
 
 #dropdown {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   display: flex;
   justify-content: space-between;
   position: relative;
   width: 170px;
   max-height: 70px;
   font-size: 20px;
-  font-weight: normal;
   color: white;
   background-color: #901c1c;
   text-align: left;
   cursor: pointer;
   border: none;
   border-radius: 5px 5px 0 0;
-  padding: 11px 11px 11px 0;
+  padding: 18px 11px 18px 0;
   margin-left: 10px;
+  z-index: 2;
+}
+
+#dropdown:focus {
+  z-index: 30000;
+
+  box-shadow: 0 0 0 3px rgb(13, 192, 0);
 }
 
 #dropdown.active {
@@ -309,6 +323,7 @@ label[for="dropdown"] {
   z-index: 1;
   overflow: hidden;
   display: block;
+  border: none;
 }
 
 #dropdown ol.filtreInvisible {
@@ -321,14 +336,19 @@ label[for="dropdown"] {
   margin: 0;
   display: block;
   width: 100%;
-  font-size: 20px;
   color: white;
   cursor: pointer;
   background-color: #901c1c;
   border-radius: 0;
   position: relative;
-  padding: 10px 0;
+  padding: 17px 0;
   padding-left: 25px;
+  border: none;
+}
+
+[role="selectionFiltre"]:focus {
+  z-index: 30000;
+  box-shadow: 0 0 0 6px rgb(13, 192, 0);
 }
 
 #dropdown ol li.hidden {

@@ -16,6 +16,7 @@ function active() {
   );
   toggleSelectedOptionVisibility();
 }
+// utilisé dans addEventListener dessous et dans 
 
 // Au clic sur le menu déroulant
 dropdown.addEventListener("click", active);
@@ -37,6 +38,7 @@ dropdownOptions.forEach(function (option) {
 function selectDefaultOption() {
   // Récupérer la première option
   const defaultOption = dropdownOptions[0];
+  console.log(defaultOption);
 
   // Mettre à jour la valeur de l'option sélectionnée
   const value = defaultOption.dataset.value;
@@ -50,6 +52,7 @@ function selectDefaultOption() {
 }
 // Appeler la fonction pour sélectionner l'option par défaut
 selectDefaultOption();
+// Utiliser juste ici lors de l'appel
 
 function toggleSelectedOptionVisibility() {
   const selectedOptionValue = selectedOption.dataset.value;
@@ -61,6 +64,8 @@ function toggleSelectedOptionVisibility() {
     }
   });
 }
+// Utiliser dans active()
+
 
 function addRoundedBottomOnLastLi() {
   // Récupération de tous les li, sauf ceux qui ont la class "hidden"
@@ -83,10 +88,12 @@ function addRoundedBottomOnLastLi() {
   ) {
     lastLi = filteredLis[filteredLis.length - 2];
   }
-
   console.log(lastLi);
   lastLi.classList.add("roundedBottom");
 }
+// Utiliser dans forEach
+
+
 
 function removeRoundedBottom() {
   const roundedBottomLi = document.querySelector("#dropdown li.roundedBottom");
@@ -94,6 +101,9 @@ function removeRoundedBottom() {
     roundedBottomLi.classList.remove("roundedBottom");
   }
 }
+// Utiliser dans forEach
+
+
 
 // Ajouter un écouteur d'événement click sur le document
 document.addEventListener("click", function (event) {
