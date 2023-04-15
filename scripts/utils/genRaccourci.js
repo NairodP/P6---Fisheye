@@ -46,11 +46,12 @@ export function openAndClose(target) {
 }
 
 // Pour les vérifs sur le carousel
-// function checkElementFocus(element) {
-//   element.addEventListener("focus", function () {
-//     console.log(element);
-//   });
+// function logFocus() {
+//   console.log(document.activeElement);
 // }
+
+// document.addEventListener('focusin', logFocus);
+
 
 const contactModal = getElementById("contact-modal");
 

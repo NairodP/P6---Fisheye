@@ -19,7 +19,7 @@ export default class FiltreMenu {
     this.ProxyTri = new ProxyTri();
   }
 
-  async sorterMovies(filtre) {
+  async filtreMedias(filtre) {
     this.clearFiltre();
     let position = 1;
 
@@ -63,7 +63,7 @@ export default class FiltreMenu {
       option.setAttribute("aria-selected", option === defaultOption);
       // console.log(option);
     });
-    this.sorterMovies("POPULARITE");
+    this.filtreMedias("POPULARITE");
   }
 
   onChangeSorter() {
@@ -77,7 +77,7 @@ export default class FiltreMenu {
       const valueOfFilter = e.target.getAttribute("value");
       // console.log(valueOfFilter);
       if (valueOfFilter) {
-        this.sorterMovies(valueOfFilter);
+        this.filtreMedias(valueOfFilter);
       } else return;
     });
 
